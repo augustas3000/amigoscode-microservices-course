@@ -6,6 +6,7 @@
 
   <groupId>com.gustyflows</groupId>
   <artifactId>micro-services-course</artifactId>
+  <packaging>pom</packaging>
   <version>1.0-SNAPSHOT</version>
 
   <name>micro-services-course</name>
@@ -13,6 +14,7 @@
 
   <modules>
 
+    <module>customer-service</module>
   </modules>
 
   <properties>
