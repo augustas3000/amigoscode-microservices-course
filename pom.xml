@@ -13,7 +13,6 @@
   <description>parent project for build and dependency management</description>
 
   <modules>
-
     <module>customer-service</module>
   </modules>
 
