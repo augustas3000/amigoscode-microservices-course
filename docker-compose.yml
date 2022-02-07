@@ -1,4 +1,6 @@
 services:
+#  we gonna reuse the same instance of the postgres running  ion one container but using different db for each microservice
+#  in real world, though it is preferable to have separate db serevr instances for each service
   postgres:
     container_name: postgres
     image: postgres

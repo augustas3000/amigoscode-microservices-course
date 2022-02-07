@@ -1,17 +1,13 @@
 package com.gustyflows.customer;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 @Service
+@AllArgsConstructor
 public class DefaultCustomerService implements ICustomerService {
 
     private final CustomerRepository customerRepository;
-
-    @Autowired
-    public DefaultCustomerService(CustomerRepository customerRepository) {
-        this.customerRepository = customerRepository;
-    }
 
     @Override
     public void registerCustomer(CustomerRegistrationRequest customerRegistrationRequest) {
