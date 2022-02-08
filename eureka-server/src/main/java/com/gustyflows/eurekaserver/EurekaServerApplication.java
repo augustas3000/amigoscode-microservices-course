@@ -11,3 +11,7 @@ public class EurekaServerApplication {
         SpringApplication.run(EurekaServerApplication.class, args);
     }
 }
+
+/*
+Service discovery dashboard available at http://localhost:8761/
+ */
