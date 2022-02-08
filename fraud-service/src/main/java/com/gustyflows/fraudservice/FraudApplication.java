@@ -1,4 +1,4 @@
-package com.gustyflows.fraud;
+package com.gustyflows.fraudservice;
 
 import io.swagger.v3.oas.annotations.OpenAPIDefinition;
 import org.springframework.boot.SpringApplication;

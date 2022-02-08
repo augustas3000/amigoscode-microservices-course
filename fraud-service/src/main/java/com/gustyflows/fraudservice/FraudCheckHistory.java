@@ -1,4 +1,4 @@
-package com.gustyflows.fraud;
+package com.gustyflows.fraudservice;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

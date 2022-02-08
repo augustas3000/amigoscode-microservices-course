@@ -1,5 +1,7 @@
 package com.gustyflows.customer;
 
+import com.gustyflows.clients.fraudservice.FraudCheckResponse;
+import com.gustyflows.clients.fraudservice.FraudServiceClient;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
@@ -10,6 +12,7 @@ public class DefaultCustomerService implements ICustomerService {
 
     private final CustomerRepository customerRepository;
     private final RestTemplate restTemplate;
+    private final FraudServiceClient fraudServiceClient;
 
     @Override
     public void registerCustomer(CustomerRegistrationRequest customerRegistrationRequest) {
@@ -21,11 +24,7 @@ public class DefaultCustomerService implements ICustomerService {
 
         customerRepository.saveAndFlush(customer);
 
-        FraudCheckResponse fraudCheckResponse = restTemplate.getForObject(
-                "http://fraud-service/api/v1/fraud-check/{customerId}",
-                FraudCheckResponse.class,
-                customer.getId()
-        );
+        FraudCheckResponse fraudCheckResponse = fraudServiceClient.isFraudster(customer.getId());
 
         if (fraudCheckResponse.isFraudster()) {
             //todo: create custom exceptions + global exception mapper
