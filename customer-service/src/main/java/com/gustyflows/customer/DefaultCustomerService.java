@@ -22,7 +22,7 @@ public class DefaultCustomerService implements ICustomerService {
         customerRepository.saveAndFlush(customer);
 
         FraudCheckResponse fraudCheckResponse = restTemplate.getForObject(
-                "http://localhost:8081/api/v1/fraud-check/{customerId}",
+                "http://fraud-service/api/v1/fraud-check/{customerId}",
                 FraudCheckResponse.class,
                 customer.getId()
         );
@@ -31,7 +31,6 @@ public class DefaultCustomerService implements ICustomerService {
             //todo: create custom exceptions + global exception mapper
             throw new IllegalStateException("Fraudster");
         }
-        //todo: check if fraudster
         //todo: check if email valid
         //todo: check if email not taken
         //todo: send notification
