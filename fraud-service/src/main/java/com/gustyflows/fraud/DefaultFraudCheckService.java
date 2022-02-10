@@ -1,4 +1,4 @@
-package com.gustyflows.fraudservice;
+package com.gustyflows.fraud;
 
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;

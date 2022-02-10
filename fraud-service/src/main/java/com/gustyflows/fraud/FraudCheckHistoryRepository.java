@@ -1,4 +1,4 @@
-package com.gustyflows.fraudservice;
+package com.gustyflows.fraud;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;

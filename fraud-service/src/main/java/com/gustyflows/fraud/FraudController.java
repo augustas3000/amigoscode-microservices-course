@@ -1,6 +1,6 @@
-package com.gustyflows.fraudservice;
+package com.gustyflows.fraud;
 
-import com.gustyflows.clients.fraudservice.FraudCheckResponse;
+import com.gustyflows.clients.fraud.FraudCheckResponse;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.GetMapping;

@@ -1,4 +1,4 @@
-package com.gustyflows.fraudservice;
+package com.gustyflows.notification;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -12,24 +12,28 @@ import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
 import java.time.LocalDateTime;
 
+
 @Data
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-public class FraudCheckHistory {
+public class Notification {
 
     @Id
     @SequenceGenerator(
-            name = "fraud_id_sequence",
-            sequenceName = "fraud_id_sequence"
+            name = "notification_id_sequence",
+            sequenceName = "notification_id_sequence"
     )
     @GeneratedValue(
             strategy = GenerationType.SEQUENCE,
-            generator = "fraud_id_sequence"
+            generator = "notification_id_sequence"
     )
     private Integer id;
-    private Integer customerId;
-    private Boolean isFraudster;
-    private LocalDateTime createdAt;
+
+    private Integer toCustomerId;
+    private String toCustomerEmail;
+    private String sender;
+    private String message;
+    private LocalDateTime sentAt;
 }
