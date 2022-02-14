@@ -1,5 +1,6 @@
 package com.gustyflows.customer;
 
+import com.gustyflows.amqp.RabbitMQMessageProducer;
 import com.gustyflows.clients.fraud.FraudCheckResponse;
 import com.gustyflows.clients.fraud.FraudServiceClient;
 import com.gustyflows.clients.notification.NotificationRequest;
@@ -13,9 +14,8 @@ import org.springframework.web.client.RestTemplate;
 public class DefaultCustomerService implements ICustomerService {
 
     private final CustomerRepository customerRepository;
-    private final RestTemplate restTemplate;
     private final FraudServiceClient fraudServiceClient;
-    private final NotificationServiceClient notificationServiceClient;
+    private final RabbitMQMessageProducer rabbitMQMessageProducer;
 
     @Override
     public void registerCustomer(CustomerRegistrationRequest customerRegistrationRequest) {
@@ -34,12 +34,15 @@ public class DefaultCustomerService implements ICustomerService {
             throw new IllegalStateException("Fraudster");
         }
 
-        //todo: make it async, i.e add to queue
-        notificationServiceClient.sendNotification(
-                new NotificationRequest(
-                        customer.getId(),
-                        customer.getEmail(),
-                        String.format("Hi %s, welcome to Amigoscode", customer.getFirstName())));
+        NotificationRequest notificationRequest = new NotificationRequest(
+                customer.getId(),
+                customer.getEmail(),
+                String.format("Hi %s, welcome to Amigoscode", customer.getFirstName()));
+
+        rabbitMQMessageProducer.publish(notificationRequest,
+                "internal.exchange",
+                "internal.notification.routing-key"
+        );
 
         //todo: check if email valid
         //todo: check if email not taken
