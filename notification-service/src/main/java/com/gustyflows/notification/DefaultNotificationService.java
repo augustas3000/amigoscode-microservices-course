@@ -14,7 +14,7 @@ public class DefaultNotificationService implements INotificationService {
 
     @Override
     public void send(NotificationRequest notificationRequest) {
-
+        //todo: implement sms/email
         notificationRepository.save(
                 Notification.builder()
                         .toCustomerId(notificationRequest.toCustomerId())
