@@ -8,7 +8,7 @@
         <artifactId>micro-services-course</artifactId>
         <version>1.0-SNAPSHOT</version>
     </parent>
-
+    <packaging>jar</packaging>
     <artifactId>customer-service</artifactId>
 
     <dependencies>
