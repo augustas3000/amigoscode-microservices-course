@@ -26,8 +26,8 @@
         <java.version>17</java.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <lombok.version>1.18.22</lombok.version>
-        <spring-boot.version>2.6.1</spring-boot.version>
-        <spring.cloud-version>2021.0.0</spring.cloud-version>
+        <spring-boot.version>2.5.7</spring-boot.version>
+        <spring.cloud-version>2020.0.3</spring.cloud-version>
         <maven-compiler-plugin.version>3.8.0</maven-compiler-plugin.version>
         <spring.boot.maven.plugin.version>2.5.7</spring.boot.maven.plugin.version>
         <!--include build number when on full ci/cd usign jenkins, etc..-->
