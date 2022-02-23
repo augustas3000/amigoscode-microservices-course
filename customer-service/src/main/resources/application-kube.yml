@@ -1,0 +1,32 @@
+server:
+  port: 8080
+spring:
+  application:
+    name: customer
+  datasource:
+    password: password
+#    url: jdbc:postgresql://{name of kubernetes service component that talks to stateful set linked to postgres pod}:5432/customer
+    url: jdbc:postgresql://postgres:5432/customer
+    username: amigoscode
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        format_sql: true
+    show-sql: true
+  zipkin:
+#    base-url: http://{name of kubernetes service component that talks to stateful set linked to zipkin pod}:9411
+    base-url: http://zipkin:9411
+  rabbitmq:
+#    addresses: {name of kubernetes service component that talks to stateful set linked to rabbitmq pod}:5672
+    addresses: rabbitmq:5672
+eureka:
+  client:
+    service-url:
+      defaultZone: http://eureka-server:8761/eureka
+    fetch-registry: true
+    register-with-eureka: true
+    enabled: false
+
