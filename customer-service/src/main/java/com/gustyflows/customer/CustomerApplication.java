@@ -15,7 +15,6 @@ import org.springframework.context.annotation.PropertySources;
         }
 )
 @OpenAPIDefinition
-@EnableEurekaClient
 @EnableFeignClients(
         basePackages = "com.gustyflows.clients"
 )

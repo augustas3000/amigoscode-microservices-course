@@ -13,7 +13,6 @@ import org.springframework.context.annotation.PropertySources;
                 "com.gustyflows.amqp"
         }
 )
-@EnableEurekaClient
 @OpenAPIDefinition
 @PropertySources({
         @PropertySource("classpath:clients-${spring.profiles.active}.properties") //property source with regard to open feign client config - default/kube - see clients/src/main/resources/clients-<profile>.properties

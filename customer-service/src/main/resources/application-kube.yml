@@ -2,7 +2,7 @@ server:
   port: 8080
 spring:
   application:
-    name: customer
+    name: customer-service
   datasource:
     password: password
 #    url: jdbc:postgresql://{name of kubernetes service component that talks to stateful set linked to postgres pod}:5432/customer
