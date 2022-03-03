@@ -9,6 +9,8 @@ spring:
     url: jdbc:postgresql://postgres:5432/customer
     username: amigoscode
   jpa:
+#    bare in mind that in k8s environment this is risky - if a second pod replica comes along, it gonna destroy the db
+#    see k8s/minikube/services/customer/deployment.yml spec.replicas
     hibernate:
       ddl-auto: create-drop
     properties:
