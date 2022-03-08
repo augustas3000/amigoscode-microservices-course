@@ -8,12 +8,17 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 @Service
-@AllArgsConstructor
 public class DefaultCustomerService implements ICustomerService {
 
     private final CustomerRepository customerRepository;
     private final FraudServiceClient fraudServiceClient;
     private final RabbitMQMessageProducer rabbitMQMessageProducer;
+
+    public DefaultCustomerService(CustomerRepository customerRepository, FraudServiceClient fraudServiceClient, RabbitMQMessageProducer rabbitMQMessageProducer) {
+        this.customerRepository = customerRepository;
+        this.fraudServiceClient = fraudServiceClient;
+        this.rabbitMQMessageProducer = rabbitMQMessageProducer;
+    }
 
     @Override
     public void registerCustomer(CustomerRegistrationRequest customerRegistrationRequest) {
