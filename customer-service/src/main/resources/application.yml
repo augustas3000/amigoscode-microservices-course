@@ -21,6 +21,9 @@ spring:
     addresses: localhost:5672
   kafka:
     bootstrap-servers: localhost:9092
+messaging:
+#  broker: kafka
+  broker: rabbitmq
 eureka:
   client:
     service-url:
@@ -28,4 +31,3 @@ eureka:
     fetch-registry: true
     register-with-eureka: true
     enabled: false
-

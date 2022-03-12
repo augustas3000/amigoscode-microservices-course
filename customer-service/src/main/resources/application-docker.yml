@@ -19,6 +19,9 @@ spring:
     base-url: http://zipkin:9411
   rabbitmq:
     addresses: rabbitmq:5672
+#    todo configure to run kafka in docker
+  kafka:
+    bootstrap-servers: localhost:9092
 eureka:
   client:
     service-url:

@@ -24,6 +24,9 @@ spring:
   rabbitmq:
 #    addresses: {name of kubernetes service component that talks to stateful set linked to rabbitmq pod}:5672
     addresses: rabbitmq:5672
+#    todo configure to run kafka in k8s
+  kafka:
+    bootstrap-servers: localhost:9092
 eureka:
   client:
     service-url:

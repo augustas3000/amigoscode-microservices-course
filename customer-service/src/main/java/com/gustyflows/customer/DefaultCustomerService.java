@@ -1,10 +1,8 @@
 package com.gustyflows.customer;
 
-import com.gustyflows.amqp.RabbitMQMessageProducer;
 import com.gustyflows.clients.fraud.FraudCheckResponse;
 import com.gustyflows.clients.fraud.FraudServiceClient;
 import com.gustyflows.clients.notification.NotificationRequest;
-import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -12,12 +10,12 @@ public class DefaultCustomerService implements ICustomerService {
 
     private final CustomerRepository customerRepository;
     private final FraudServiceClient fraudServiceClient;
-    private final RabbitMQMessageProducer rabbitMQMessageProducer;
+    private final MessageSender messageSender;
 
-    public DefaultCustomerService(CustomerRepository customerRepository, FraudServiceClient fraudServiceClient, RabbitMQMessageProducer rabbitMQMessageProducer) {
+    public DefaultCustomerService(CustomerRepository customerRepository, FraudServiceClient fraudServiceClient, MessageSender messageSender) {
         this.customerRepository = customerRepository;
         this.fraudServiceClient = fraudServiceClient;
-        this.rabbitMQMessageProducer = rabbitMQMessageProducer;
+        this.messageSender = messageSender;
     }
 
     @Override
@@ -45,12 +43,6 @@ public class DefaultCustomerService implements ICustomerService {
                 customer.getEmail(),
                 String.format("Hi %s, welcome to Amigoscode", customer.getFirstName()));
 
-        //todo: move exchange and key to a property class
-        rabbitMQMessageProducer.publish(notificationRequest,
-                "internal.exchange",
-                "internal.notification.routing-key"
-        );
-
-
+        messageSender.send(notificationRequest);
     }
 }

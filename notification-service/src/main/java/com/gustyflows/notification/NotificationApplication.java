@@ -3,15 +3,22 @@ package com.gustyflows.notification;
 import io.swagger.v3.oas.annotations.OpenAPIDefinition;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
+import org.springframework.boot.autoconfigure.kafka.KafkaAutoConfiguration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.context.annotation.PropertySources;
+
+/*
+when switching to rabbitmq messaging, ensure KafkaAutoConfiguration.class is excluded
+to prevent application from trying to connect to kafka
+ */
 
 @SpringBootApplication(
         scanBasePackages = {
                 "com.gustyflows.notification",
-                "com.gustyflows.amqp"
-        }
+                "com.gustyflows.amqp",
+                "com.gustyflows.kafka"
+        },
+        exclude = {KafkaAutoConfiguration.class}
 )
 @OpenAPIDefinition
 @PropertySources({
