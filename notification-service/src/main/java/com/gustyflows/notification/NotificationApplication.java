@@ -14,11 +14,9 @@ to prevent application from trying to connect to kafka
 
 @SpringBootApplication(
         scanBasePackages = {
-                "com.gustyflows.notification",
-                "com.gustyflows.amqp",
-                "com.gustyflows.kafka"
-        },
-        exclude = {KafkaAutoConfiguration.class}
+                "com.gustyflows"
+        }
+//        exclude = {KafkaAutoConfiguration.class}
 )
 @OpenAPIDefinition
 @PropertySources({

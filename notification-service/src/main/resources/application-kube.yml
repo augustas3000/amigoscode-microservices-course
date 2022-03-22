@@ -35,3 +35,4 @@ rabbitmq:
   routing-keys:
     internal-notification: internal.notification.routing-key
 
+#todo make kafka work in kubernetes
