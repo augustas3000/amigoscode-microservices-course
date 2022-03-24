@@ -40,6 +40,11 @@
         <app-config-properties.version>1.0-SNAPSHOT</app-config-properties.version>
         <kafka-model.version>1.0-SNAPSHOT</kafka-model.version>
         <kafka-producer.version>1.0-SNAPSHOT</kafka-producer.version>
+        <springdoc-openapi-ui.version>1.6.5</springdoc-openapi-ui.version>
+        <clients.version>1.0-SNAPSHOT</clients.version>
+        <kafka-admin.version>1.0-SNAPSHOT</kafka-admin.version>
+        <amqp.version>1.0-SNAPSHOT</amqp.version>
+        <jib-maven-plugin.version>3.1.4</jib-maven-plugin.version>
     </properties>
 
     <repositories>
@@ -51,6 +56,30 @@
 
     <dependencyManagement>
         <dependencies>
+            <dependency>
+                <groupId>com.gustyflows</groupId>
+                <artifactId>amqp</artifactId>
+                <version>${amqp.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.springdoc</groupId>
+                <artifactId>springdoc-openapi-ui</artifactId>
+                <version>${springdoc-openapi-ui.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.gustyflows</groupId>
+                <artifactId>clients</artifactId>
+                <version>${clients.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.gustyflows</groupId>
+                <artifactId>kafka-admin</artifactId>
+                <version>${kafka-admin.version}</version>
+            </dependency>
+
             <dependency>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-dependencies</artifactId>
@@ -162,7 +191,7 @@
                 <plugin>
                     <groupId>com.google.cloud.tools</groupId>
                     <artifactId>jib-maven-plugin</artifactId>
-                    <version>3.1.4</version>
+                    <version>${jib-maven-plugin.version}</version>
                     <configuration>
                         <from>
                             <!--base img-->
@@ -192,6 +221,27 @@
                             <goals>
                                 <goal>build</goal>
                             </goals>
+                        </execution>
+                    </executions>
+                </plugin>
+
+                <plugin>
+                    <groupId>org.apache.avro</groupId>
+                    <artifactId>avro-maven-plugin</artifactId>
+                    <version>${avro.version}</version>
+                    <configuration>
+                        <stringType>String</stringType>
+                    </configuration>
+                    <executions>
+                        <execution>
+                            <phase>generate-sources</phase>
+                            <goals>
+                                <goal>schema</goal>
+                            </goals>
+                            <configuration>
+                                <sourceDirectory>${project.basedir}/src/main/resources/avro</sourceDirectory>
+                                <outputDirectory>${project.basedir}/src/main/java</outputDirectory>
+                            </configuration>
                         </execution>
                     </executions>
                 </plugin>

@@ -12,12 +12,6 @@
     <artifactId>kafka-producer</artifactId>
 
     <dependencies>
-<!--        <dependency>-->
-<!--            <groupId>com.sun.jersey</groupId>-->
-<!--            <artifactId>jersey-client</artifactId>-->
-<!--            <version>1.19.4</version>-->
-<!--        </dependency>-->
-
         <dependency>
             <groupId>com.gustyflows</groupId>
             <artifactId>app-config-properties</artifactId>

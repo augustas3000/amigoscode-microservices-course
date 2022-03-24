@@ -1,6 +1,6 @@
 package com.gustyflows.microservices.kafka.producer.service.impl;
 
-import com.gustyflows.microservices.kafka.avro.model.NotificationAvroModel;
+import com.gustyflows.microservices.kafka.avro.model.NotificationRequestAvroModel;
 import com.gustyflows.microservices.kafka.producer.service.KafkaProducer;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.kafka.clients.producer.RecordMetadata;
@@ -14,19 +14,19 @@ import javax.annotation.PreDestroy;
 
 @Slf4j
 @Service
-public class NotificationKafkaProducer implements KafkaProducer<Long, NotificationAvroModel> {
+public class NotificationKafkaProducer implements KafkaProducer<Long, NotificationRequestAvroModel> {
 
-    private final KafkaTemplate<Long, NotificationAvroModel> kafkaTemplate;
+    private final KafkaTemplate<Long, NotificationRequestAvroModel> kafkaTemplate;
 
-    public NotificationKafkaProducer(KafkaTemplate<Long, NotificationAvroModel> kafkaTemplate) {
+    public NotificationKafkaProducer(KafkaTemplate<Long, NotificationRequestAvroModel> kafkaTemplate) {
         this.kafkaTemplate = kafkaTemplate;
     }
 
     @Override
-    public void send(String topicName, Long key, NotificationAvroModel message) {
+    public void send(String topicName, Long key, NotificationRequestAvroModel message) {
         log.info("Sending message='{}' to topic='{}'", message, topicName);
 
-        ListenableFuture<SendResult<Long, NotificationAvroModel>> sendResultFuture =
+        ListenableFuture<SendResult<Long, NotificationRequestAvroModel>> sendResultFuture =
                 kafkaTemplate.send(topicName, key, message);
 
         addCallback(topicName, message, sendResultFuture);
@@ -34,8 +34,8 @@ public class NotificationKafkaProducer implements KafkaProducer<Long, Notificati
 
     private void addCallback(
             String topicName,
-            NotificationAvroModel message,
-            ListenableFuture<SendResult<Long, NotificationAvroModel>> sendResultFuture) {
+            NotificationRequestAvroModel message,
+            ListenableFuture<SendResult<Long, NotificationRequestAvroModel>> sendResultFuture) {
 
         sendResultFuture.addCallback(new ListenableFutureCallback<>() {
             @Override
@@ -44,7 +44,7 @@ public class NotificationKafkaProducer implements KafkaProducer<Long, Notificati
             }
 
             @Override
-            public void onSuccess(SendResult<Long, NotificationAvroModel> result) {
+            public void onSuccess(SendResult<Long, NotificationRequestAvroModel> result) {
                 RecordMetadata recordMetadata = result.getRecordMetadata();
                 log.debug("Received new metadata. Topic: {}; Partition: {}; Offset: {}; Timestamp: {}, at time {}",
                         recordMetadata.topic(),

@@ -75,6 +75,11 @@
 
         <dependency>
             <groupId>com.gustyflows</groupId>
+            <artifactId>kafka-admin</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.gustyflows</groupId>
             <artifactId>app-config-properties</artifactId>
         </dependency>
     </dependencies>
