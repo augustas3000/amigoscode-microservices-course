@@ -29,9 +29,9 @@ public class Notification {
             strategy = GenerationType.SEQUENCE,
             generator = "notification_id_sequence"
     )
-    private Integer id;
+    private Long id;
 
-    private Integer toCustomerId;
+    private Long toCustomerId;
     private String toCustomerEmail;
     private String sender;
     private String message;

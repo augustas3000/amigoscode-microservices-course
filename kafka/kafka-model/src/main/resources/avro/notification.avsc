@@ -1,0 +1,41 @@
+{
+  "namespace": "com.gustyflows.microservices.kafka.avro.model",
+  "type": "record",
+  "name": "NotificationAvroModel",
+  "fields": [
+    {
+      "name": "toCustomerId",
+      "type": "long"
+    },
+    {
+      "name": "toCustomerEmail",
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    {
+      "name": "message",
+      "type": [
+        "null",
+        "string"
+      ]
+    }
+  ]
+}
+
+{
+  "namespace": "com.kafka.avro.event.sample",
+  "type": "record",
+  "name": "data",
+  "fields": [
+    {
+      "name": "testEventId",
+      "type": "int"
+    },
+    {
+      "name": "test",
+      "type": "string"
+    }
+  ]
+}

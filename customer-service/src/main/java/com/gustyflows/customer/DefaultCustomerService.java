@@ -3,6 +3,10 @@ package com.gustyflows.customer;
 import com.gustyflows.clients.fraud.FraudCheckResponse;
 import com.gustyflows.clients.fraud.FraudServiceClient;
 import com.gustyflows.clients.notification.NotificationRequest;
+import com.gustyflows.customer.transformer.CustomerToNotificationRequestAvroModelTransformer;
+import com.gustyflows.microservices.kafka.avro.model.NotificationAvroModel;
+import com.gustyflows.microservices.kafka.producer.service.KafkaProducer;
+import com.gustyflows.microservices.kafka.properties.KafkaConfigProperties;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -11,11 +15,17 @@ public class DefaultCustomerService implements ICustomerService {
     private final CustomerRepository customerRepository;
     private final FraudServiceClient fraudServiceClient;
     private final MessageSender messageSender;
+    private final KafkaProducer<Long, NotificationAvroModel> kafkaProducer;
+    private final KafkaConfigProperties kafkaConfigProperties;;
+    private CustomerToNotificationRequestAvroModelTransformer customerToNotificationRequestAvroModelTransformer;
 
-    public DefaultCustomerService(CustomerRepository customerRepository, FraudServiceClient fraudServiceClient, MessageSender messageSender) {
+    public DefaultCustomerService(CustomerRepository customerRepository, FraudServiceClient fraudServiceClient, MessageSender messageSender, KafkaProducer<Long, NotificationAvroModel> kafkaProducer, KafkaConfigProperties kafkaConfigProperties, CustomerToNotificationRequestAvroModelTransformer customerToNotificationRequestAvroModelTransformer) {
         this.customerRepository = customerRepository;
         this.fraudServiceClient = fraudServiceClient;
         this.messageSender = messageSender;
+        this.kafkaProducer = kafkaProducer;
+        this.kafkaConfigProperties = kafkaConfigProperties;
+        this.customerToNotificationRequestAvroModelTransformer = customerToNotificationRequestAvroModelTransformer;
     }
 
     @Override
@@ -41,8 +51,11 @@ public class DefaultCustomerService implements ICustomerService {
         NotificationRequest notificationRequest = new NotificationRequest(
                 customer.getId(),
                 customer.getEmail(),
-                String.format("Hi %s, welcome to Amigoscode", customer.getFirstName()));
+                "sup");
 
-        messageSender.send(notificationRequest);
+        NotificationAvroModel avroModelFromCustomer =
+                customerToNotificationRequestAvroModelTransformer.getNotificationAvroModelFromCustomer(customer);
+
+        kafkaProducer.send(kafkaConfigProperties.getTopicName(), avroModelFromCustomer.getToCustomerId(), avroModelFromCustomer);
     }
 }

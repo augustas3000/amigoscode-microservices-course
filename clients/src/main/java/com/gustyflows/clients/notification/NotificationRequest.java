@@ -1,7 +1,7 @@
 package com.gustyflows.clients.notification;
 
 public record NotificationRequest(
-        Integer toCustomerId,
+        Long toCustomerId,
         String toCustomerEmail,
         String message) {
 }

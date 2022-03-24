@@ -21,6 +21,7 @@
         <module>apigw</module>
         <module>amqp</module>
         <module>kafka</module>
+        <module>app-config-properties</module>
     </modules>
 
     <properties>
@@ -33,7 +34,20 @@
         <spring.boot.maven.plugin.version>2.5.7</spring.boot.maven.plugin.version>
         <!--include build number when on full ci/cd usign jenkins, etc..-->
         <image>gustyflows/${project.artifactId}:${project.version}</image>
+        <avro.version>1.10.0</avro.version>
+        <spring-kafka.version>2.8.3</spring-kafka.version>
+        <kafka-avro-serializer.version>7.0.1</kafka-avro-serializer.version>
+        <app-config-properties.version>1.0-SNAPSHOT</app-config-properties.version>
+        <kafka-model.version>1.0-SNAPSHOT</kafka-model.version>
+        <kafka-producer.version>1.0-SNAPSHOT</kafka-producer.version>
     </properties>
+
+    <repositories>
+        <repository>
+            <id>confluent</id>
+            <url>https://packages.confluent.io/maven/</url>
+        </repository>
+    </repositories>
 
     <dependencyManagement>
         <dependencies>
@@ -53,6 +67,59 @@
                 <scope>import</scope>
             </dependency>
 
+            <dependency>
+                <groupId>com.gustyflows</groupId>
+                <artifactId>kafka-producer</artifactId>
+                <version>${kafka-producer.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.gustyflows</groupId>
+                <artifactId>kafka-model</artifactId>
+                <version>${kafka-model.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.gustyflows</groupId>
+                <artifactId>app-config-properties</artifactId>
+                <version>${app-config-properties.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.apache.avro</groupId>
+                <artifactId>avro</artifactId>
+                <version>${avro.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.springframework.kafka</groupId>
+                <artifactId>spring-kafka</artifactId>
+                <version>${spring-kafka.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>io.confluent</groupId>
+                <artifactId>kafka-avro-serializer</artifactId>
+                <version>${kafka-avro-serializer.version}</version>
+                <exclusions>
+                    <exclusion>
+                        <groupId>org.slf4j</groupId>
+                        <artifactId>slf4j-log4j12</artifactId>
+                    </exclusion>
+                    <exclusion>
+                        <groupId>log4j</groupId>
+                        <artifactId>log4j</artifactId>
+                    </exclusion>
+                    <exclusion>
+                        <groupId>io.swagger</groupId>
+                        <artifactId>swagger-annotations</artifactId>
+                    </exclusion>
+                    <exclusion>
+                        <groupId>io.swagger</groupId>
+                        <artifactId>swagger-core</artifactId>
+                    </exclusion>
+                </exclusions>
+            </dependency>
 
         </dependencies>
     </dependencyManagement>
@@ -83,7 +150,7 @@
                 <plugin>
                     <groupId>org.springframework.boot</groupId>
                     <artifactId>spring-boot-maven-plugin</artifactId>
-                    <version>${spring.boot.maven.plugin.version}</version>
+                    <version>${spring-boot.version}</version>
                     <executions>
                         <execution>
                             <goals>

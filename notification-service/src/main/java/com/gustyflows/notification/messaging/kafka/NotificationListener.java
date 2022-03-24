@@ -21,7 +21,7 @@ public class NotificationListener {
     }
 
     @KafkaListener(
-            topics = "customer-to-notification",
+            topics = "notification-topic",
             containerFactory = "notificationRequestListenerContainerFactory"
     )
     void listener(NotificationRequest notificationRequest) {

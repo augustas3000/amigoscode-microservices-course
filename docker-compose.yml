@@ -34,14 +34,14 @@ services:
       - "9411:9411"
     networks:
       - spring
-  rabbitmq:
-    image: rabbitmq:3.9.11-management-alpine
-    container_name: rabbitmq
-    ports:
-      - "5672:5672"
-      - "15672:15672"
-    networks:
-      - spring
+#  rabbitmq:
+#    image: rabbitmq:3.9.11-management-alpine
+#    container_name: rabbitmq
+#    ports:
+#      - "5672:5672"
+#      - "15672:15672"
+#    networks:
+#      - spring
   zookeeper:
 #    todo extract kafka version to a .env file docker pull confluentinc/cp-zookeeper:latest
     image: confluentinc/cp-zookeeper:5.0.4
@@ -72,7 +72,7 @@ services:
     environment:
       SCHEMA_REGISTRY_HOST_NAME: schema-registry
       SCHEMA_REGISTRY_KAFKASTORE_CONNECTION_URL: 'zookeeper:2181'
-      SCHEMA_REGISTRY_LISTENERS: http://schema-registry:8081
+      SCHEMA_REGISTRY_LISTENERS: http://schema-registry:8085
       SCHEMA_REGISTRY_DEBUG: 'true'
     networks:
       - spring
@@ -150,51 +150,51 @@ services:
 #    depends_on:
 #      - zipkin
 #      - eureka-server
-  customer-service:
-    image: gustyflows/customer-service:latest
-    container_name: customer
-    ports:
-      - "8080:8080"
-    environment:
-      - SPRING_PROFILES_ACTIVE=docker
-    networks:
-      - spring
-      - postgres
-    depends_on:
-      - zipkin
-#      - eureka-server
-      - postgres
-      - rabbitmq
-  fraud-service:
-    image: gustyflows/fraud-service:latest
-    container_name: fraud
-    ports:
-      - "8081:8081"
-    environment:
-      - SPRING_PROFILES_ACTIVE=docker
-    networks:
-      - spring
-      - postgres
-    depends_on:
-      - zipkin
-#      - eureka-server
-      - postgres
-      - rabbitmq
-  notification-service:
-    image: gustyflows/notification-service:latest
-    container_name: notification
-    ports:
-      - "8082:8082"
-    environment:
-      - SPRING_PROFILES_ACTIVE=docker
-    networks:
-      - spring
-      - postgres
-    depends_on:
-      - zipkin
-#      - eureka-server
-      - postgres
-      - rabbitmq
+#  customer-service:
+#    image: gustyflows/customer-service:latest
+#    container_name: customer
+#    ports:
+#      - "8080:8080"
+#    environment:
+#      - SPRING_PROFILES_ACTIVE=docker
+#    networks:
+#      - spring
+#      - postgres
+#    depends_on:
+#      - zipkin
+##      - eureka-server
+#      - postgres
+#      - rabbitmq
+#  fraud-service:
+#    image: gustyflows/fraud-service:latest
+#    container_name: fraud
+#    ports:
+#      - "8081:8081"
+#    environment:
+#      - SPRING_PROFILES_ACTIVE=docker
+#    networks:
+#      - spring
+#      - postgres
+#    depends_on:
+#      - zipkin
+##      - eureka-server
+#      - postgres
+#      - rabbitmq
+#  notification-service:
+#    image: gustyflows/notification-service:latest
+#    container_name: notification
+#    ports:
+#      - "8082:8082"
+#    environment:
+#      - SPRING_PROFILES_ACTIVE=docker
+#    networks:
+#      - spring
+#      - postgres
+#    depends_on:
+#      - zipkin
+##      - eureka-server
+#      - postgres
+#      - rabbitmq
 networks:
   postgres:
     driver: bridge

@@ -9,12 +9,13 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>kafka</artifactId>
-    <packaging>pom</packaging>
-    <modules>
-        <module>kafka-admin</module>
-        <module>kafka-model</module>
-        <module>kafka-producer</module>
-    </modules>
+    <artifactId>app-config-properties</artifactId>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot</artifactId>
+        </dependency>
+    </dependencies>
 
 </project>
