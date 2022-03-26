@@ -22,7 +22,7 @@ public class NotificationListener {
 
     @KafkaListener(
             topics = "notification-topic",
-            containerFactory = "notificationRequestListenerContainerFactory"
+            containerFactory = "kafkaListenerContainerFactory"
     )
     void listener(NotificationRequest notificationRequest) {
         //todo replace with custom object notification request

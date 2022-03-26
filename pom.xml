@@ -45,6 +45,8 @@
         <kafka-admin.version>1.0-SNAPSHOT</kafka-admin.version>
         <amqp.version>1.0-SNAPSHOT</amqp.version>
         <jib-maven-plugin.version>3.1.4</jib-maven-plugin.version>
+        <stax2-api.version>4.0.0</stax2-api.version>
+        <kafka-consumer.version>1.0-SNAPSHOT</kafka-consumer.version>
     </properties>
 
     <repositories>
@@ -56,6 +58,18 @@
 
     <dependencyManagement>
         <dependencies>
+            <dependency>
+                <groupId>com.gustyflows</groupId>
+                <artifactId>kafka-consumer</artifactId>
+                <version>${kafka-consumer.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.codehaus.woodstox</groupId>
+                <artifactId>stax2-api</artifactId>
+                <version>${stax2-api.version}</version>
+            </dependency>
+
             <dependency>
                 <groupId>com.gustyflows</groupId>
                 <artifactId>amqp</artifactId>

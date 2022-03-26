@@ -67,6 +67,11 @@
             <groupId>org.springframework.kafka</groupId>
             <artifactId>spring-kafka</artifactId>
         </dependency>
+
+        <dependency>
+            <groupId>com.gustyflows</groupId>
+            <artifactId>kafka-consumer</artifactId>
+        </dependency>
     </dependencies>
 
     <build>

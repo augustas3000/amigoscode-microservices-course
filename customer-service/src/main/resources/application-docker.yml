@@ -42,7 +42,7 @@ kafka-config:
   # hostnames from docker compose file - todo check this
   bootstrap-servers: kafka-broker-1:9092, kafka-broker-2:9092, kafka-broker-3:9092
   schema-registry-url-key: schema.registry.url
-  schema-registry-url: http://localhost:8081
+  schema-registry-url: http://schema-registry:8085
   topic-name: notification-topic
   topic-names-to-create:
     - notification-topic
