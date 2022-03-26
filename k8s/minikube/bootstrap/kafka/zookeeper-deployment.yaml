@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: zookeeper-deploy
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: zookeeper-1
+  template:
+    metadata:
+      labels:
+        app: zookeeper-1
+    spec:
+      containers:
+        - name: zoo1
+          image: digitalwonderland/zookeeper
+          readinessProbe:
+            httpGet:
+              port: 7070
+              path: /readiness
+            initialDelaySeconds: 120
+            periodSeconds: 15
+            failureThreshold: 1
+          livenessProbe:
+            httpGet:
+              port: 7070
+              path: /liveness
+            initialDelaySeconds: 360
+            periodSeconds: 15
+            failureThreshold: 3
+          ports:
+            - containerPort: 2181
+          env:
+            - name: ZOOKEEPER_ID
+              value: "1"
+            - name: ZOOKEEPER_SERVER_1
+              value: zoo1
