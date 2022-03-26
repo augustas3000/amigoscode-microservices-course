@@ -32,6 +32,7 @@ public class KafkaConsumerConfig<K extends Serializable, V extends SpecificRecor
     @Bean
     public Map<String, Object> consumerConfigs() {
         HashMap<String, Object> props = new HashMap<>();
+        props.put(kafkaConsumerConfigProperties.getSpecificAvroReaderKey(), kafkaConsumerConfigProperties.getSpecificAvroReader());
         props.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, kafkaConfigProperties.getBootstrapServers());
         props.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, kafkaConsumerConfigProperties.getKeyDeserializer());
         props.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, kafkaConsumerConfigProperties.getValueDeserializer());

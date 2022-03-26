@@ -39,3 +39,30 @@ rabbitmq:
 messaging:
   broker: kafka
 #  broker: rabbitmq
+kafka-config:
+  # hostnames from docker compose file
+  bootstrap-servers: kafka-broker-1:9092, kafka-broker-2:9092, kafka-broker-3:9092
+  schema-registry-url-key: schema.registry.url
+  schema-registry-url: http://schema-registry:8085
+  topic-name: notification-topic
+  topic-names-to-create:
+    - notification-topic
+  number-of-partitions: 3
+  replication-factor: 3
+kafka-consumer-config:
+  key-deserializer: org.apache.kafka.common.serialization.LongDeserializer
+  value-deserializer: io.confluent.kafka.serializers.KafkaAvroDeserializer
+  consumer-group-id: notification-topic-consumer
+  auto-offset-reset: earliest
+  specific-avro-reader-key: specific.avro.reader
+  specific-avro-reader: true
+  batch-listener: true
+  auto-startup: false
+  concurrency-level: 3
+  session-timeout-ms: 10000
+  heart-beat-interval: 3000
+  max-poll-interval-ms: 300000
+  max-poll-records: 500
+  max-partition-fetch-bytes-default: 1048576
+  max-partition-fetch-bytes-boost-factor: 1
+  poll-timeout-ms: 150
