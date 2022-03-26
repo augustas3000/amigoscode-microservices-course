@@ -72,6 +72,16 @@
             <groupId>com.gustyflows</groupId>
             <artifactId>kafka-consumer</artifactId>
         </dependency>
+
+        <dependency>
+            <groupId>com.gustyflows</groupId>
+            <artifactId>kafka-model</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.gustyflows</groupId>
+            <artifactId>kafka-admin</artifactId>
+        </dependency>
     </dependencies>
 
     <build>

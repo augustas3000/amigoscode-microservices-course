@@ -1,6 +1,7 @@
 package com.gustyflows.notification.messaging.kafka;
 
 import com.gustyflows.clients.notification.NotificationRequest;
+import com.gustyflows.microservices.kafka.avro.model.NotificationRequestAvroModel;
 import com.gustyflows.notification.DefaultNotificationService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
@@ -24,9 +25,9 @@ public class NotificationListener {
             topics = "notification-topic",
             containerFactory = "kafkaListenerContainerFactory"
     )
-    void listener(NotificationRequest notificationRequest) {
+    void listener(NotificationRequestAvroModel notificationRequest) {
         //todo replace with custom object notification request
         log.info("Consumed {} from topic", notificationRequest);
-        notificationService.send(notificationRequest);
+//        notificationService.send(notificationRequest);
     }
 }
